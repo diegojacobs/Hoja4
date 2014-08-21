@@ -19,8 +19,9 @@ public class Hoja4 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Listas<Integer> _lista = null;
-        Nodo<Integer>[] list;
+        Listas<String> _lista = null;
+        Nodo<String>[] list;
+        
         ListasFactory Factory = new ListasFactory();
         //list = new Nodo<Integer>(8);
         Scanner _in  = new Scanner(System.in);
@@ -32,6 +33,7 @@ public class Hoja4 {
         System.out.print("Elija entre listas y Stack: \n");
         System.out.print("1. Lista\n");
         System.out.print("2. Stack\n");
+        System.out.print("Número de opción: \n");
         opcion = _in.nextInt();
         
             switch (opcion){
@@ -40,6 +42,7 @@ public class Hoja4 {
                     System.out.print("1. Simple\n");
                     System.out.print("2. Doble\n");
                     System.out.print("3. Circular\n");
+                    System.out.print("Número de opción: \n");
                     opcion2 = _in.nextInt();
                     
                     while (opcion3!= 4){
@@ -47,22 +50,84 @@ public class Hoja4 {
                         System.out.print("2. Mostrar\n");
                         System.out.print("3. Calcular\n");
                         System.out.print("4. Salir\n");
+                        System.out.print("Número de opción: \n");
                         opcion3 = _in.nextInt();
             
                         Listas _list = Factory.getClass(opcion2);
                         switch(opcion3)
                         {
                             case 1:
-                                System.out.print("Ingrese un numero: ");
-                                int num =_in.nextInt();
-                                _lista.Agregar(num);
-                                break;
+                                LeerArchivo entrada = new LeerArchivo();
+                                Evaluar check = new Evaluar();
+                                String expr;
+                                expr = entrada.postfix();
+        
+                                for (int i=1;i<=expr.length();i++)
+                                {
+                                    String car;
+                                    car = expr.substring(i-1, i);
+                                    _list.Agregar(car);    
+                                }
+                    
                             case 2:
                                 System.out.print(_lista.toString());
                                 System.out.print("\n");
                                 break;    
                             case 3:
                                 
+                                int num, num2;
+                                Evaluar check2 = new Evaluar();
+                                expr = _list.toString();
+                                
+                                for (int i=expr.length();i==1;i++)
+                                {
+                                    String car;
+                                    car = expr.substring(i-1, i);
+                                    if ("resta".equals(check2.operacion(car)))
+                                    {
+                                        num=Integer.parseInt(expr.substring(i-2, i-1));
+                                        num2=Integer.parseInt(expr.substring(i-3, i-2));
+                                        num=num2-num;
+                                        _list.Eliminar(i);
+                                        _list.Eliminar(i-1);
+                                        _list.Eliminar(i-2);
+                                        _list.Agregar(num);
+                                    }
+                                    if ("suma".equals(check2.operacion(car)))
+                                    {
+                                        num=Integer.parseInt(expr.substring(i-2, i-1));
+                                        num2=Integer.parseInt(expr.substring(i-3, i-2));
+                                        num=num2+num;
+                                        _list.Eliminar(i);
+                                        _list.Eliminar(i-1);
+                                        _list.Eliminar(i-2);
+                                        _list.Agregar(num);
+                                    }
+                                    if ("por".equals(check2.operacion(car)))
+                                    {
+                                        num=Integer.parseInt(expr.substring(i-2, i-1));
+                                        num2=Integer.parseInt(expr.substring(i-3, i-2));
+                                        num=num2*num;
+                                        _list.Eliminar(i);
+                                        _list.Eliminar(i-1);
+                                        _list.Eliminar(i-2);
+                                        _list.Agregar(num);
+                                    }
+                                    if ("dividir".equals(check2.operacion(car)))
+                                    {
+                                        num=Integer.parseInt(expr.substring(i-2, i-1));
+                                        num2=Integer.parseInt(expr.substring(i-3, i-2));
+                                        num=num2/num;
+                                        _list.Eliminar(i);
+                                        _list.Eliminar(i-1);
+                                        _list.Eliminar(i-2);
+                                        _list.Agregar(num);
+                                    }
+                                    expr = _list.toString();
+                                }
+                                num=0;
+                                System.out.print("\nEl resultado es: ");
+                                System.out.print(num);
                                 break;
                         }
                     }
