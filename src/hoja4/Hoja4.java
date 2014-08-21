@@ -53,7 +53,7 @@ public class Hoja4 {
                         System.out.print("Número de opción: \n");
                         opcion3 = _in.nextInt();
             
-                        Listas _list = Factory.getClass(opcion2);
+                        Lista_Simple<String> _list = new Lista_Simple<>();//Factory.getClass(opcion2);
                         switch(opcion3)
                         {
                             case 1:
@@ -68,7 +68,7 @@ public class Hoja4 {
                                     car = expr.substring(i-1, i);
                                     _list.Agregar(car);    
                                 }
-                    
+                                break;
                             case 2:
                                 System.out.print(_lista.toString());
                                 System.out.print("\n");
