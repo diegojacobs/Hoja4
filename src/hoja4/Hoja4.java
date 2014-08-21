@@ -125,12 +125,13 @@ public class Hoja4 {
                                     }
                                     expr = _list.toString();
                                 }
-                                num=0;
+                                num =Integer.parseInt(_list.toString());
                                 System.out.print("\nEl resultado es: ");
                                 System.out.print(num);
                                 break;
                         }
                     }
+                    break;
                 }
                 case 2:
                     myStack st = new myStack();
